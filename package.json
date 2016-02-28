@@ -1,0 +1,25 @@
+{
+  "name": "http.min",
+  "version": "1.0.1",
+  "description": "Minimalistic & simplistic HTTP API",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "keywords": [
+    "http",
+    "client",
+    "promise",
+    "simple",
+    "minimal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/matjaz/node-http.min.git"
+  },
+  "author": "Matjaz Lipus <matjazl@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^6.0.7"
+  }
+}
