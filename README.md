@@ -27,9 +27,10 @@ http.post('https://httpbin.org/post', {data: 'hello'}).then(function (result) {
 })
 ```
 
-Form urlencoded
+Form urlencoded. Second `data` parameter is a string instead of an object.
 
 ```javascript
+var http = require('http.min')
 http.post('https://httpbin.org/post', 'data=hello').then(function (result) {
   console.log('Code: ' + result.response.statusCode)
   console.log('Response: ' + result.data)
@@ -39,8 +40,8 @@ http.post('https://httpbin.org/post', 'data=hello').then(function (result) {
 ### JSON
 ```javascript
 var http = require('http.min')
-http.json('https://httpbin.org/get').then(function (result) {
-  console.log('Response:', result.url)
+http.json('https://httpbin.org/get').then(function (data) {
+  console.log('Response:', data.url)
 })
 ```
 
@@ -56,8 +57,8 @@ var options = {
     'User-Agent': 'Node.js http.min'
   }
 }
-http.json(options).then(function (result) {
-  console.log('Response:', result)
+http.json(options).then(function (data) {
+  console.log('Response:', data)
 })
 ```
 
