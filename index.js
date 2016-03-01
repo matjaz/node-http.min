@@ -12,13 +12,13 @@ METHODS.forEach(function (method) {
       if (data) {
         var isObject = typeof data === 'object'
         var headers = options.headers || (options.headers = {})
-        if (!headers['Content-Type']) {
-          headers['Content-Type'] = isObject ? 'application/json' : 'application/x-www-form-urlencoded'
+        if (!headers['content-type']) {
+          headers['content-type'] = isObject ? 'application/json' : 'application/x-www-form-urlencoded'
         }
         if (isObject) {
           data = JSON.stringify(data)
         }
-        headers['Content-Length'] = data.length
+        headers['content-length'] = data.length
       }
       if (typeof options === 'string') {
         options = url.parse(options)
