@@ -1,6 +1,7 @@
 var url = require('url')
 var http = require('http')
 var https = require('https')
+var querystring = require('querystring')
 
 var HTTP = {}
 var METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
@@ -22,6 +23,8 @@ METHODS.forEach(function (method) {
       }
       if (typeof options === 'string') {
         options = url.parse(options)
+      } else if (options.query) {
+        options.path += '?' + querystring.stringify(options.query)
       }
       options.method = method
       var module = options.protocol.replace(':', '') === 'https' ? https : http
