@@ -3,11 +3,11 @@ var http = require('http')
 var https = require('https')
 
 var HTTP = {}
-var METHODS = ['get', 'post', 'patch', 'put', 'delete']
+var METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
 
 METHODS.forEach(function (method) {
   // https://nodejs.org/api/http.html#http_http_request_options_callback
-  HTTP[method] = function (options, data) {
+  HTTP[method.toLowerCase()] = function (options, data) {
     return new Promise(function (resolve, reject) {
       if (data) {
         var isObject = typeof data === 'object'
