@@ -1,5 +1,5 @@
 # Minimal HTTP library
-[![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
+[![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
 Minimal simple API for HTTP with promises.  
 Supports common methods GET, POST, PUT, PATCH, DELETE and JSON parsing.  
@@ -67,7 +67,8 @@ http.json(options).then(function (data) {
 ## License
 ISC
 
-
+[npm-image]: https://img.shields.io/npm/v/http.min.svg
+[npm-url]: https://www.npmjs.com/package/http.min
 [travis-image]: https://img.shields.io/travis/matjaz/node-http.min/master.svg?style=flat
 [travis-url]: https://travis-ci.org/matjaz/node-http.min
 [coverage-image]: https://img.shields.io/coveralls/matjaz/node-http.min/master.svg?style=flat
