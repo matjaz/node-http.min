@@ -88,7 +88,7 @@ var options = {
 }
 http.post(options).then(function (result) {
   console.log('Code: ' + result.response.statusCode)
-  console.log('Response: ' + result.data)
+  console.log('Response:', result.data)
 })
 ```
 

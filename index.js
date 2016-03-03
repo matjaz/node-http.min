@@ -13,14 +13,15 @@ METHODS.forEach(function (method) {
       if (typeof options === 'string') {
         options = url.parse(options)
       } else {
+        var query = options.query
+        if (options.form) {
+          data = querystring.stringify(options.form)
+        }
         if (options.uri) {
           merge(options, url.parse(options.uri))
         }
-        if (options.query) {
-          options.path += '?' + querystring.stringify(options.query)
-        }
-        if (options.form) {
-          data = querystring.stringify(options.form)
+        if (query) {
+          options.path += '?' + querystring.stringify(query)
         }
       }
       if (data) {
