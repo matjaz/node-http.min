@@ -9,25 +9,36 @@ var METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
 METHODS.forEach(function (method) {
   // https://nodejs.org/api/http.html#http_http_request_options_callback
   HTTP[method.toLowerCase()] = function (options, data) {
-    return new Promise(function (resolve, reject) {
+    var promise = new Promise(function (resolve, reject) {
+      if (typeof options === 'string') {
+        options = url.parse(options)
+      } else {
+        if (options.uri) {
+          merge(options, url.parse(options.uri))
+        }
+        if (options.query) {
+          options.path += '?' + querystring.stringify(options.query)
+        }
+        if (options.form) {
+          data = querystring.stringify(options.form)
+        }
+      }
       if (data) {
-        var isObject = typeof data === 'object'
+        var isFormData = typeof data === 'string'
         var headers = options.headers || (options.headers = {})
         if (!headers['content-type']) {
-          headers['content-type'] = isObject ? 'application/json' : 'application/x-www-form-urlencoded'
+          headers['content-type'] = isFormData ? 'application/x-www-form-urlencoded' : 'application/json'
         }
-        if (isObject) {
+        if (options.json && !headers['accept']) {
+          headers['accept'] = 'application/json'
+        }
+        if (!isFormData) {
           data = JSON.stringify(data)
         }
         headers['content-length'] = data.length
       }
-      if (typeof options === 'string') {
-        options = url.parse(options)
-      } else if (options.query) {
-        options.path += '?' + querystring.stringify(options.query)
-      }
       options.method = method
-      var module = options.protocol.replace(':', '') === 'https' ? https : http
+      var module = options.protocol.indexOf('https') === 0 ? https : http
       var req = module.request(options, function (response) {
         var data = ''
         response.setEncoding('utf8')
@@ -48,13 +59,30 @@ METHODS.forEach(function (method) {
       }
       req.end()
     })
+    if (options.json) {
+      promise = parseJSON(promise)
+    }
+    return promise
   }
 })
 
 HTTP.json = function (options) {
-  return this.get(options).then(function (result) {
+  return parseJSON(this.get(options)).then(function (result) {
+    return result.data
+  })
+}
+
+function merge (dest, src) {
+  for (var k in src) {
+    dest[k] = src[k]
+  }
+}
+
+function parseJSON (promise) {
+  return promise.then(function (result) {
     try {
-      return JSON.parse(result.data)
+      result.data = JSON.parse(result.data)
+      return result
     } catch (e) {
       return Promise.reject(e)
     }

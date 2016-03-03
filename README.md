@@ -1,7 +1,7 @@
-# Minimal HTTP library
+# Minimal HTTP client library
 [![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
-Minimal simple API for HTTP with promises.  
+Minimal simple HTTP client with promises.  
 Supports common methods GET, POST, PUT, PATCH, DELETE and JSON parsing.  
 Under 100 SLOC.  
 
@@ -21,6 +21,8 @@ http.get('https://httpbin.org/get').then(function (result) {
 ```
 
 ### POST
+
+#### JSON
 ```javascript
 var http = require('http.min')
 http.post('https://httpbin.org/post', {data: 'hello'}).then(function (result) {
@@ -29,7 +31,8 @@ http.post('https://httpbin.org/post', {data: 'hello'}).then(function (result) {
 })
 ```
 
-Form urlencoded. Second `data` parameter is a string instead of an object.
+#### Form urlencoded
+`data` parameter is a string.
 
 ```javascript
 var http = require('http.min')
@@ -48,7 +51,9 @@ http.json('https://httpbin.org/get').then(function (data) {
 ```
 
 ### Advanced
-It accepts [http.request options][node-http-options]
+
+#### Functions also accept [http.request options object][node-http-options].
+
 ```javascript
 var http = require('http.min')
 var options = {
@@ -61,6 +66,29 @@ var options = {
 }
 http.json(options).then(function (data) {
   console.log('Response:', data)
+})
+```
+
+#### Helpers
+
+```javascript
+var http = require('http.min')
+var options = {
+  uri: 'https://httpbin.org/post',
+  // query string helper
+  query: {
+    hello: 'test'
+  },
+  // form urlencoded
+  form: {
+    test: 'ok'
+  },
+  // send & receive JSON
+  json: true
+}
+http.post(options).then(function (result) {
+  console.log('Code: ' + result.response.statusCode)
+  console.log('Response: ' + result.data)
 })
 ```
 

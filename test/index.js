@@ -42,7 +42,7 @@ describe('simple requests', function () {
     it('urlencoded data', function () {
       nock('http://example.com')
         // .matchHeader('content-type', 'application/x-www-form-urlencoded')
-        // .matchHeader(' content-length', '13')
+        // .matchHeader('content-length', '13')
         .post('/test', 'test=ok')
         .reply(201, ':)')
       return http.post('http://example.com/test', 'test=ok').then(function (result) {
@@ -58,8 +58,8 @@ describe('Advanced requests', function () {
     nock('https://example.com')
       .matchHeader('x-test', 'yes')
       .matchHeader('content-type', 'application/octet-stream')
-      // .matchHeader(' content-length', '13')
-      .post('/test')
+      // .matchHeader('content-length', '13')
+      .post('/test', 'test=1')
       .reply(201, 'ok')
     var options = {
       protocol: 'https:',
@@ -78,8 +78,8 @@ describe('Advanced requests', function () {
 
   it('should add query', function () {
     nock('https://example.com')
-      // .matchHeader(' content-length', '6')
-      .post('/test')
+      // .matchHeader('content-length', '6')
+      .post('/test', 'test=1')
       .query({q: 'test'})
       .reply(201, 'ok')
     var options = {
@@ -87,12 +87,62 @@ describe('Advanced requests', function () {
       host: 'example.com',
       path: '/test',
       query: {
-        'q': 'test'
+        q: 'test'
       }
     }
     return http.post(options, 'test=1').then(function (result) {
       expect(result.response.statusCode).to.equal(201)
       expect(result.data).to.equal('ok')
+    })
+  })
+
+  it('should handle uri option', function () {
+    nock('https://example.com')
+      .post('/test', 'test=2')
+      .query({q: 'test'})
+      .reply(201, 'ok')
+    var options = {
+      uri: 'https://example.com/test',
+      query: {
+        q: 'test'
+      }
+    }
+    return http.post(options, 'test=2').then(function (result) {
+      expect(result.response.statusCode).to.equal(201)
+      expect(result.data).to.equal('ok')
+    })
+  })
+
+  it('should handle form option', function () {
+    nock('https://example.com')
+      .post('/test', 'test=ok')
+      .reply(201, 'okk')
+    var options = {
+      uri: 'https://example.com/test',
+      form: {
+        test: 'ok'
+      }
+    }
+    return http.post(options).then(function (result) {
+      expect(result.response.statusCode).to.equal(201)
+      expect(result.data).to.equal('okk')
+    })
+  })
+
+  it('should handle json option', function () {
+    nock('https://example.com')
+      .matchHeader('accept', 'application/json')
+      .post('/test', {test: 'ok'})
+      .reply(200, '{"test":"ok"}')
+    var options = {
+      uri: 'https://example.com/test',
+      json: true
+    }
+    return http.post(options, {test: 'ok'}).then(function (result) {
+      expect(result.response.statusCode).to.equal(200)
+      expect(result.data).to.eql({
+        test: 'ok'
+      })
     })
   })
 })
