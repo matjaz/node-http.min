@@ -144,6 +144,25 @@ describe('Advanced requests', function () {
       expect(result.data).to.equal('okk')
     })
   })
+
+  it('should handle form & parse JSON', function () {
+    nock('https://example.com')
+      .post('/test', 'data=test')
+      .reply(200, '{"test":"ok"}')
+    var options = {
+      uri: 'https://example.com/test',
+      form: {
+        data: 'test'
+      },
+      json: true
+    }
+    return http.post(options).then(function (result) {
+      expect(result.response.statusCode).to.equal(200)
+      expect(result.data).to.eql({
+        test: 'ok'
+      })
+    })
+  })
 })
 
 describe('JSON', function () {

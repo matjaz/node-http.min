@@ -14,10 +14,11 @@ METHODS.forEach(function (method) {
         options = url.parse(options)
       } else {
         var query = options.query
+        if (options.form) {
+          data = querystring.stringify(options.form)
+        }
         if (typeof options.json === 'object') {
           data = options.json
-        } else if (options.form) {
-          data = querystring.stringify(options.form)
         }
         if (options.uri) {
           merge(options, url.parse(options.uri))
