@@ -14,7 +14,9 @@ METHODS.forEach(function (method) {
         options = url.parse(options)
       } else {
         var query = options.query
-        if (options.form) {
+        if (typeof options.json === 'object') {
+          data = options.json
+        } else if (options.form) {
           data = querystring.stringify(options.form)
         }
         if (options.uri) {
@@ -25,15 +27,15 @@ METHODS.forEach(function (method) {
         }
       }
       if (data) {
-        var isFormData = typeof data === 'string'
+        var isObject = typeof data === 'object'
         var headers = options.headers || (options.headers = {})
         if (!headers['content-type']) {
-          headers['content-type'] = isFormData ? 'application/x-www-form-urlencoded' : 'application/json'
+          headers['content-type'] = isObject ? 'application/json' : 'application/x-www-form-urlencoded'
         }
         if (options.json && !headers['accept']) {
           headers['accept'] = 'application/json'
         }
-        if (!isFormData) {
+        if (isObject) {
           data = JSON.stringify(data)
         }
         headers['content-length'] = data.length

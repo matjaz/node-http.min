@@ -144,7 +144,9 @@ describe('Advanced requests', function () {
       expect(result.data).to.equal('okk')
     })
   })
+})
 
+describe('JSON', function () {
   it('should handle json option', function () {
     nock('https://example.com')
       .matchHeader('accept', 'application/json')
@@ -161,9 +163,26 @@ describe('Advanced requests', function () {
       })
     })
   })
-})
 
-describe('JSON parsing', function () {
+  it('should handle json object option', function () {
+    nock('https://example.com')
+      .matchHeader('accept', 'application/json')
+      .post('/test', {data: true})
+      .reply(200, '{"test":"ok"}')
+    var options = {
+      uri: 'https://example.com/test',
+      json: {
+        data: true
+      }
+    }
+    return http.post(options).then(function (result) {
+      expect(result.response.statusCode).to.equal(200)
+      expect(result.data).to.eql({
+        test: 'ok'
+      })
+    })
+  })
+
   it('should parse response', function () {
     nock('http://example.com')
       .get('/json')
