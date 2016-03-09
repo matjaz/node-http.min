@@ -2,7 +2,7 @@
 [![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
 Minimal simple HTTP client with promises.  
-Supports common methods GET, POST, PUT, PATCH, DELETE and JSON parsing.  
+Supports common methods GET, POST, PUT, PATCH, DELETE and JSON support.  
 No dependencies, under 100 SLOC.  
 
 ## Install
@@ -83,7 +83,7 @@ var options = {
   form: {
     test: 'ok'
   },
-  // send & receive JSON
+  // handle JSON data
   json: true
 }
 http.post(options).then(function (result) {
