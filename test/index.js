@@ -96,6 +96,22 @@ describe('Advanced requests', function () {
     })
   })
 
+  it('should not add query if empty object', function () {
+    nock('https://example.com')
+      .post('/', 'test=1')
+      .reply(201, 'ok')
+    var options = {
+      protocol: 'https:',
+      host: 'example.com',
+      path: '/',
+      query: {}
+    }
+    return http.post(options, 'test=1').then(function (result) {
+      expect(result.response.statusCode).to.equal(201)
+      expect(result.data).to.equal('ok')
+    })
+  })
+
   it('should handle uri option', function () {
     nock('https://example.com')
       .post('/test', 'test=2')

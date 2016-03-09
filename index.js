@@ -20,7 +20,7 @@ METHODS.forEach(function (method) {
         if (options.uri) {
           merge(options, url.parse(options.uri))
         }
-        if (query) {
+        if (query && Object.keys(query).length !== 0) {
           options.path += '?' + querystring.stringify(query)
         }
       }
