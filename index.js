@@ -55,9 +55,7 @@ METHODS.forEach(function (method) {
             response: response
           })
         })
-      }).on('error', function (err) {
-        reject(err)
-      })
+      }).on('error', reject)
       if (options.timeout) {
         req.setTimeout(options.timeout)
       }
