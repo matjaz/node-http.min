@@ -66,6 +66,9 @@ METHODS.forEach(function (method) {
       if (data) {
         req.write(data)
       }
+      if (options.request) {
+        options.request(req)
+      }
       req.end()
     })
     if (options.json) {

@@ -253,4 +253,21 @@ describe('request', function () {
       expect(err).to.equal('timeout')
     })
   })
+
+  it('should be passed to options.request', function () {
+    var request
+    nock('http://example.com')
+      .get('/test')
+      .reply(200, 'ok')
+
+    return http.get({
+      uri: 'http://example.com/test',
+      request: function (req) {
+        request = req
+      }
+    })
+    .then(function (res) {
+      expect(request).to.be.a(require('http').ClientRequest)
+    })
+  })
 })
