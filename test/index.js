@@ -235,3 +235,22 @@ describe('errors', function () {
     })
   })
 })
+
+describe('request', function () {
+  it('should reject on timeout', function () {
+    nock('http://example.com')
+      .get('/test')
+      .socketDelay(2000) // 2 seconds
+      .reply(200, 'ok')
+    return http.get({
+      uri: 'http://example.com/test',
+      timeout: 1500
+    })
+    .then(function (res) {
+      expect().fail('should reject promise')
+    })
+    .catch(function (err) {
+      expect(err).to.equal('timeout')
+    })
+  })
+})

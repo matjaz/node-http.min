@@ -58,6 +58,13 @@ METHODS.forEach(function (method) {
       }).on('error', function (err) {
         reject(err)
       })
+      if (options.timeout) {
+        req.setTimeout(options.timeout)
+      }
+      req.on('timeout', function () {
+        req.destroy()
+        reject('timeout')
+      })
       if (data) {
         req.write(data)
       }
