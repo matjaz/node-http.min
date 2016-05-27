@@ -101,4 +101,6 @@ function parseJSON (promise) {
   })
 }
 
-module.exports = HTTP
+// make http.get() default exported function
+merge(HTTP.get, HTTP)
+module.exports = HTTP.get

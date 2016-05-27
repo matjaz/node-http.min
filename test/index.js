@@ -4,6 +4,12 @@ var http = require('../')
 var nock = require('nock')
 var expect = require('expect.js')
 
+describe('default export', function () {
+  it('should equal to get', function () {
+    expect(http).to.equal(http.get)
+  })
+})
+
 describe('built-in methods', function () {
   it('should exists', function () {
     var methods = ['get', 'post', 'patch', 'put', 'delete']
