@@ -4,7 +4,7 @@ var https = require('https')
 var querystring = require('querystring')
 
 var HTTP = {}
-var METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+var METHODS = ['HEAD', 'OPTIONS', 'GET', 'PUT', 'PATCH', 'POST', 'DELETE']
 
 METHODS.forEach(function (method) {
   // https://nodejs.org/api/http.html#http_http_request_options_callback

@@ -12,7 +12,7 @@ describe('default export', function () {
 
 describe('built-in methods', function () {
   it('should exists', function () {
-    var methods = ['get', 'post', 'patch', 'put', 'delete']
+    var methods = ['head', 'options', 'get', 'put', 'patch', 'post', 'delete']
     methods.forEach(function (method) {
       expect(http[method]).to.be.a('function')
     })
