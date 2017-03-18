@@ -225,7 +225,7 @@ describe('JSON', function () {
       .reply(200, 'invalid')
     return http.json('http://example.com/json').catch(function (err) {
       expect(err.name).to.equal('SyntaxError')
-      expect(err.message).to.equal('Unexpected token i')
+      expect(err.message).to.contain('Unexpected token i')
     })
   })
 })
@@ -256,7 +256,8 @@ describe('request', function () {
       expect().fail('should reject promise')
     })
     .catch(function (err) {
-      expect(err).to.equal('timeout')
+      expect(err).to.be.an(Error)
+      expect(err.message).to.equal('timeout')
     })
   })
 

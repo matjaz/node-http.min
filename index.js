@@ -61,7 +61,7 @@ METHODS.forEach(function (method) {
       }
       req.on('timeout', function () {
         req.destroy()
-        reject('timeout')
+        reject(new Error('timeout'))
       })
       if (data) {
         req.write(data)
