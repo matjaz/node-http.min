@@ -39,7 +39,7 @@ METHODS.forEach(function (method) {
         if (isObject) {
           data = JSON.stringify(data)
         }
-        headers['content-length'] = data.length
+        headers['content-length'] = Buffer.byteLength(data)
       }
       options.method = method
       var module = options.protocol.indexOf('https') === 0 ? https : http

@@ -56,6 +56,17 @@ describe('simple requests', function () {
         expect(result.data).to.equal(':)')
       })
     })
+
+    it('content-length', function () {
+      nock('http://example.com')
+        .matchHeader('content-length', '7')
+        .post('/test', 'test=Ä')
+        .reply(201, ':)')
+      return http.post('http://example.com/test', 'test=Ä').then(function (result) {
+        expect(result.response.statusCode).to.equal(201)
+        expect(result.data).to.equal(':)')
+      })
+    })
   })
 })
 
