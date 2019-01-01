@@ -1,4 +1,7 @@
 # Minimal HTTP client library
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/matjaz/node-http.min.svg)](https://greenkeeper.io/)
+
 [![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
 Minimal simple HTTP client with promises.  
