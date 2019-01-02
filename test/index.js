@@ -39,7 +39,7 @@ describe('simple requests', function () {
           test: 'ok'
         })
         .reply(201, ':)')
-      return http.post('http://example.com/test', {test: 'ok'}).then(function (result) {
+      return http.post('http://example.com/test', { test: 'ok' }).then(function (result) {
         expect(result.response.statusCode).to.equal(201)
         expect(result.data).to.equal(':)')
       })
@@ -97,7 +97,7 @@ describe('Advanced requests', function () {
     nock('https://example.com')
       // .matchHeader('content-length', '6')
       .post('/test', 'test=1')
-      .query({q: 'test'})
+      .query({ q: 'test' })
       .reply(201, 'ok')
     var options = {
       protocol: 'https:',
@@ -132,7 +132,7 @@ describe('Advanced requests', function () {
   it('should handle uri option', function () {
     nock('https://example.com')
       .post('/test', 'test=2')
-      .query({q: 'test'})
+      .query({ q: 'test' })
       .reply(201, 'ok')
     var options = {
       uri: 'https://example.com/test',
@@ -186,13 +186,13 @@ describe('JSON', function () {
   it('should handle json option', function () {
     nock('https://example.com')
       .matchHeader('accept', 'application/json')
-      .post('/test', {test: 'ok'})
+      .post('/test', { test: 'ok' })
       .reply(200, '{"test":"ok"}')
     var options = {
       uri: 'https://example.com/test',
       json: true
     }
-    return http.post(options, {test: 'ok'}).then(function (result) {
+    return http.post(options, { test: 'ok' }).then(function (result) {
       expect(result.response.statusCode).to.equal(200)
       expect(result.data).to.eql({
         test: 'ok'
@@ -203,7 +203,7 @@ describe('JSON', function () {
   it('should handle json object option', function () {
     nock('https://example.com')
       .matchHeader('accept', 'application/json')
-      .post('/test', {data: true})
+      .post('/test', { data: true })
       .reply(200, '{"test":"ok"}')
     var options = {
       uri: 'https://example.com/test',
@@ -244,8 +244,8 @@ describe('JSON', function () {
 describe('errors', function () {
   it('should be handled', function () {
     nock('http://example.com')
-     .get('/test')
-     .replyWithError('nooooo')
+      .get('/test')
+      .replyWithError('nooooo')
     return http.json('http://example.com/test').catch(function (err) {
       expect(err.name).to.equal('Error')
       expect(err.message).to.equal('nooooo')
@@ -263,13 +263,13 @@ describe('request', function () {
       uri: 'http://example.com/test',
       timeout: 1500
     })
-    .then(function (res) {
-      expect().fail('should reject promise')
-    })
-    .catch(function (err) {
-      expect(err).to.be.an(Error)
-      expect(err.message).to.equal('timeout')
-    })
+      .then(function (res) {
+        expect().fail('should reject promise')
+      })
+      .catch(function (err) {
+        expect(err).to.be.an(Error)
+        expect(err.message).to.equal('timeout')
+      })
   })
 
   it('should be passed to options.request', function () {
@@ -284,8 +284,8 @@ describe('request', function () {
         request = req
       }
     })
-    .then(function (res) {
-      expect(request).to.be.a(require('http').ClientRequest)
-    })
+      .then(function (res) {
+        expect(request).to.be.a(require('http').ClientRequest)
+      })
   })
 })
