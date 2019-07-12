@@ -1,4 +1,4 @@
-var url = require('url')
+var URL = require('url').URL
 var http = require('http')
 var https = require('https')
 var querystring = require('querystring')
@@ -11,7 +11,7 @@ METHODS.forEach(function (method) {
   HTTP[method.toLowerCase()] = function (options, data) {
     var promise = new Promise(function (resolve, reject) {
       if (typeof options === 'string') {
-        options = url.parse(options)
+        options = parseUrl(options)
       } else {
         var query = options.query
         if (options.form) {
@@ -21,7 +21,7 @@ METHODS.forEach(function (method) {
           data = options.json
         }
         if (options.uri) {
-          merge(options, url.parse(options.uri))
+          merge(options, parseUrl(options.uri))
         }
         if (query) {
           if (Object.keys(query).length !== 0) {
@@ -91,6 +91,13 @@ function merge (dest, src) {
   for (var k in src) {
     dest[k] = src[k]
   }
+  return dest
+}
+
+function parseUrl (url) {
+  const options = merge({}, new URL(url))
+  options.path = options.pathname
+  return options
 }
 
 function parseJSON (promise) {
