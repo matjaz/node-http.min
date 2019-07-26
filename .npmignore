@@ -1,5 +1,4 @@
-/.history
-/.npmignore
-/.travis.yml
-/coverage/*
-/test
+*
+//package.json
+!/index.js
+!/README.md
