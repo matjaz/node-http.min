@@ -1,6 +1,6 @@
 {
   "name": "http.min",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Minimalistic & simplistic HTTP client. No dependencies, under 100 SLOC.",
   "main": "index.js",
   "scripts": {
