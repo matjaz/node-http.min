@@ -97,7 +97,7 @@ function merge (dest, src) {
 
 function parseURL (url) {
   const options = merge({}, new URL(url))
-  options.path = options.pathname
+  options.path = options.pathname + options.search
   return options
 }
 

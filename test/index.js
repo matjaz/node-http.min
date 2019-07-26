@@ -30,6 +30,17 @@ describe('simple requests', function () {
     })
   })
 
+  it('should pass full path & query', function () {
+    nock('http://example.com')
+      .get('/test')
+      .query({ q: 'test' })
+      .reply(200, 'ok')
+    return http.get('http://example.com/test?q=test').then(function (result) {
+      expect(result.response.statusCode).to.equal(200)
+      expect(result.data).to.equal('ok')
+    })
+  })
+
   describe('POST should send', function () {
     it('JSON data', function () {
       nock('http://example.com')
