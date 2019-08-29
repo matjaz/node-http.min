@@ -35,8 +35,8 @@ const HTTP = {};
         if (!headers['content-type']) {
           headers['content-type'] = isObject ? 'application/json' : 'application/x-www-form-urlencoded'
         }
-        if (options.json && !headers['accept']) {
-          headers['accept'] = 'application/json'
+        if (options.json && !headers.accept) {
+          headers.accept = 'application/json'
         }
         if (isObject) {
           data = JSON.stringify(data)
