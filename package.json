@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pretest": "standard",
-    "test": "npm run coverage --silent",
-    "coverage": "nyc --reporter=lcov --reporter=text-summary mocha"
+    "test": "standard && nyc mocha",
+    "report": "nyc report --reporter=html"
   },
   "keywords": [
     "http",
