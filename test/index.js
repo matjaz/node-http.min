@@ -241,6 +241,15 @@ describe('JSON', function () {
     })
   })
 
+  it('should handle empty response', function () {
+    nock('http://example.com')
+      .get('/json')
+      .reply(200, '')
+    return http.json('http://example.com/json').then(function (data) {
+      expect(data).to.eql({})
+    })
+  })
+
   it('should return error on invalid response', function () {
     nock('http://example.com')
       .get('/json')

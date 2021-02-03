@@ -103,7 +103,7 @@ function parseURL (url) {
 
 function parseJSON (result) {
   try {
-    result.data = JSON.parse(result.data)
+    result.data = JSON.parse(result.data || '{}')
     return result
   } catch (e) {
     return Promise.reject(e)
