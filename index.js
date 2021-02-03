@@ -52,7 +52,7 @@ const HTTP = {};
           data.push(chunk)
         })
         response.on('end', function () {
-          var result = {
+          let result = {
             data: data.join(''),
             response: response
           }

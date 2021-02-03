@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 
-var http = require('../')
-var nock = require('nock')
-var expect = require('expect.js')
+const http = require('../')
+const nock = require('nock')
+const expect = require('expect.js')
 
 describe('default export', function () {
   it('should equal to get', function () {
@@ -12,7 +12,7 @@ describe('default export', function () {
 
 describe('built-in methods', function () {
   it('should exists', function () {
-    var methods = ['head', 'options', 'get', 'put', 'patch', 'post', 'delete']
+    const methods = ['head', 'options', 'get', 'put', 'patch', 'post', 'delete']
     methods.forEach(function (method) {
       expect(http[method]).to.be.a('function')
     })
@@ -89,7 +89,7 @@ describe('Advanced requests', function () {
       // .matchHeader('content-length', '13')
       .post('/test', 'test=1')
       .reply(201, 'ok')
-    var options = {
+    const options = {
       protocol: 'https:',
       host: 'example.com',
       path: '/test',
@@ -110,7 +110,7 @@ describe('Advanced requests', function () {
       .post('/test', 'test=1')
       .query({ q: 'test' })
       .reply(201, 'ok')
-    var options = {
+    const options = {
       protocol: 'https:',
       host: 'example.com',
       path: '/test',
@@ -128,7 +128,7 @@ describe('Advanced requests', function () {
     nock('https://example.com')
       .post('/', 'test=1')
       .reply(201, 'ok')
-    var options = {
+    const options = {
       protocol: 'https:',
       host: 'example.com',
       path: '/',
@@ -145,7 +145,7 @@ describe('Advanced requests', function () {
       .post('/test', 'test=2')
       .query({ q: 'test' })
       .reply(201, 'ok')
-    var options = {
+    const options = {
       uri: 'https://example.com/test',
       query: {
         q: 'test'
@@ -161,7 +161,7 @@ describe('Advanced requests', function () {
     nock('https://example.com')
       .post('/test', 'test=ok')
       .reply(201, 'okk')
-    var options = {
+    const options = {
       uri: 'https://example.com/test',
       form: {
         test: 'ok'
@@ -177,7 +177,7 @@ describe('Advanced requests', function () {
     nock('https://example.com')
       .post('/test', 'data=test')
       .reply(200, '{"test":"ok"}')
-    var options = {
+    const options = {
       uri: 'https://example.com/test',
       form: {
         data: 'test'
@@ -199,7 +199,7 @@ describe('JSON', function () {
       .matchHeader('accept', 'application/json')
       .post('/test', { test: 'ok' })
       .reply(200, '{"test":"ok"}')
-    var options = {
+    const options = {
       uri: 'https://example.com/test',
       json: true
     }
@@ -216,7 +216,7 @@ describe('JSON', function () {
       .matchHeader('accept', 'application/json')
       .post('/test', { data: true })
       .reply(200, '{"test":"ok"}')
-    var options = {
+    const options = {
       uri: 'https://example.com/test',
       json: {
         data: true
@@ -277,7 +277,7 @@ describe('request', function () {
   it('should reject on timeout', function () {
     nock('http://example.com')
       .get('/test')
-      .socketDelay(2000) // 2 seconds
+      .delayConnection(2000) // 2 seconds
       .reply(200, 'ok')
     return http.get({
       uri: 'http://example.com/test',
@@ -293,7 +293,7 @@ describe('request', function () {
   })
 
   it('should be passed to options.request', function () {
-    var request
+    let request
     nock('http://example.com')
       .get('/test')
       .reply(200, 'ok')
