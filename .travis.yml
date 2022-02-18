@@ -4,6 +4,8 @@ node_js:
   - 11
   - 12
   - 13
+  - 14
+  - 16
   - node
 after_success:
   - 'npm i coveralls@2 && nyc report --reporter=text-lcov | coveralls'
