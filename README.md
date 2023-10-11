@@ -1,7 +1,7 @@
 # Minimal HTTP client library
 
 
-[![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url] [![Greenkeeper badge](https://badges.greenkeeper.io/matjaz/node-http.min.svg)](https://greenkeeper.io/)
+[![NPM][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Known Vulnerabilities][snyk-image]][snyk-url]
 
 Minimal simple HTTP client with promises.  
 Supports HTTP, HTTPS and common methods GET, POST, PUT, PATCH, DELETE.  
@@ -118,8 +118,6 @@ ISC
 [coverage-url]: https://coveralls.io/r/matjaz/node-http.min
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
 [standard-url]: http://standardjs.com
-[david-image]: https://img.shields.io/david/matjaz/node-http.min.svg?style=flat
-[david-url]: https://david-dm.org/matjaz/node-http.min
-[david-dev-image]: https://img.shields.io/david/dev/matjaz/node-http.min.svg?style=flat
-[david-dev-url]: https://david-dm.org/matjaz/node-http.min#info=devDependencies
+[snyk-image]: https://snyk.io/test/npm/http.min/badge.svg
+[snyk-url]: https://snyk.io/test/npm/http.min
 [node-http-options]: https://nodejs.org/api/http.html#http_http_request_options_callback

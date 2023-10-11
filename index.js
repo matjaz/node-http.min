@@ -54,7 +54,7 @@ const HTTP = {};
         response.on('end', function () {
           let result = {
             data: data.join(''),
-            response: response
+            response
           }
           if (options.json) {
             result = parseJSON(result)
